@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>
+            <h1 class="text-center mb-4">
                 Comic Index
             </h1>
 
@@ -48,6 +48,18 @@
                             </td>
                             <td>
                                 <a href="{{ route('comics.show',['comic' => $comic->id] ) }}" class="btn btn-dark btn-sm">More info</a>
+                                <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-warning text-white">Update</a>
+
+                                <form
+                                onsubmit="return confirm('Are you sure you want to delete this Comic?');"
+                                action="{{ route('comics.destroy', ['comic' => $comic->id]) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </form>
                             </td>
                         </tr>
                     @endforeach
