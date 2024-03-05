@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 use App\Models\Comic;
 
+
+// Request
+use App\Http\Requests\StoreComicRequest;
+use App\Http\Requests\UpdateComicRequest;
+
+
+
+
 class ComicController extends Controller
 {
     /**
@@ -31,9 +39,11 @@ class ComicController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $newComicData = $request->all();
+    public function store(StoreComicRequest $request)
+        {
+        $validatedData = $request->validated();
+        $newComicData = $validatedData;
+
         $comic = New Comic();
         $comic->title =  $newComicData['title'];
         $comic->description =  $newComicData['description'];
@@ -68,31 +78,34 @@ class ComicController extends Controller
     {
         $comic = Comic::findOrFail($id);
         return view('comics.update', compact('comic'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateComicRequest $request, string $id)
     {
-        $newComicData = $request->all();
-
+        $validatedData = $request->validated();
+    
         $comic = Comic::findOrFail($id);
-        $comic = New Comic();
-        $comic->title =  $newComicData['title'];
-        $comic->description =  $newComicData['description'];
-        $comic->thumb =  $newComicData['thumb'];
-        $comic->price =  $newComicData['price'];
-        $comic->series =  $newComicData['series'];
-        $comic->sale_date =  $newComicData['sale_date'];
-        $comic->type =  $newComicData['type'];
-        $explodeArtists = explode(',',$newComicData['artists']);
+    
+        $comic->title = $validatedData['title'];
+        $comic->description = $validatedData['description'];
+        $comic->thumb = $validatedData['thumb'];
+        $comic->price = $validatedData['price'];
+        $comic->series = $validatedData['series'];
+        $comic->sale_date = $validatedData['sale_date'];
+        $comic->type = $validatedData['type'];
+    
+        $explodeArtists = explode(',', $validatedData['artists']);
         $comic->artists = json_encode($explodeArtists);
-        $explodeWriters = explode(',',$newComicData['writers']);
+    
+        $explodeWriters = explode(',', $validatedData['writers']);
         $comic->writers = json_encode($explodeWriters);
+    
         $comic->save();
-        dd($comic);
-
+    
         return redirect()->route('comics.show', ['comic' => $comic->id]);
     }
 

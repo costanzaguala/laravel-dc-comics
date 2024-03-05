@@ -47,10 +47,10 @@
                                 {{ $comic->type }}
                             </td>
                             <td>
-                                <a href="{{ route('comics.show',['comic' => $comic->id] ) }}" class="btn btn-dark btn-sm">More info</a>
-                                <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-warning text-white">Update</a>
+                                <a href="{{ route('comics.show',['comic' => $comic->id] ) }}" class="btn btn-dark my-2">More info</a>
+                                <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-warning text-white my-2">Update</a>
 
-                                <form
+                                <form class="my-2"
                                 onsubmit="return confirm('Are you sure you want to delete this Comic?');"
                                 action="{{ route('comics.destroy', ['comic' => $comic->id]) }}"
                                 method="POST">
