@@ -11,7 +11,7 @@
             </h1>
 
             <div class="mb-4">
-                <a href="{{ route('comics.create') }}" class="btn btn-suc cess btn-sm">More info</a>
+                <a href="{{ route('comics.create') }}" class="btn btn-success btn-sm">Create new</a>
             </div>
             <table class="table">
                 <thead>

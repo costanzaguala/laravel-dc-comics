@@ -59,7 +59,7 @@
 
                 <div class="mb-3">
                     <label for="writers">Writers</label>
-                    <input type="password" id="writers" name="writers" class="form-control" aria-describedby="Writers-help">
+                    <input type="text" id="writers" name="writers" class="form-control" aria-describedby="Writers-help">
                     <div id="Writers-help" class="form-text text-muted">
                       Insert writers separated by commas.
                     </div>
